@@ -10,22 +10,32 @@ import javax.swing.WindowConstants
 import com.kine.windowing._
 import com.kine.game._
 
-import com.kine.windowing.{UI, MainPanel, Readout}
+import com.kine.windowing.{UI, MainPanel}
+import scala.util.Random
+
 object Main {
   def main(args: Array[String]): Unit = {
-    showMainWindow("HTML Explorer") { ui =>
+    val title = "Rock Paper Scissors Simulator"
+
+    showMainWindow(title) { ui =>
       ui setLocationRelativeTo null
       ui setDefaultCloseOperation WindowConstants.EXIT_ON_CLOSE
       ui.pack()
       ui setVisible true
     }
   }
+  def generateEntity: (World) => GameObject = (world) =>
+    Random.between(0, 3) match
+      case 0 => Scissors(world)
+      case 1 => Rock(world)
+      case 2 => Paper(world)
 
   def showMainWindow(title: String) = {
-    val label = new JLabel("Hello world!")
-    val panel = MainPanel()
-    val readout = Readout("Test")
-    val ui = UI(title, panel(label, readout))
+    val map = World(0, 100, 0, 100)
+    val entities: Seq[GameObject] = 1 to 50 map (_ => generateEntity(map))
+    val drawManager = DrawManager()
+    val panel = MainPanel(GamePanel(drawManager))
+    val ui = UI(title, panel, Dials())
     (fn: Function[UI, Unit]) => SwingUtilities.invokeLater(() => fn(ui))
   }
 }
