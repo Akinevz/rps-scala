@@ -2,5 +2,5 @@ package com.kine
 
 package object game {
   type GOId = Integer
-  type Entities = Pool[GameObject]
+  type Entities = Pool[Entity]
 }
