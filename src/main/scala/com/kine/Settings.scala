@@ -11,7 +11,7 @@ import javax.swing.JComponent
 // }
 
 final case class Settings(
-    rules:Rules, spawnNumber:Integer, velocity:Double
+    spawnNumber:Integer, velocity:Double
 )
 
 trait Setting[T] {

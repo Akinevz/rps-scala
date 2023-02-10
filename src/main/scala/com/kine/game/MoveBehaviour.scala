@@ -1,7 +1,8 @@
 package com.kine.game
 
-trait MoveBehaviour { this:Behaviour => 
+trait MoveBehaviour[T] { this:Behaviour[T] => 
   def canMove: Boolean
   def moveSpeed: Double
-  def moveTarget: (World) => Point
+  def senseRadius: Double
+  def moveTarget: (World) => (Point) => Point
 }

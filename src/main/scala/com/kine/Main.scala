@@ -10,7 +10,6 @@ import javax.swing.WindowConstants
 import com.kine.windowing._
 import com.kine.game._
 
-import com.kine.windowing.{UI, MainPanel}
 import scala.util.Random
 
 object Main {
@@ -30,23 +29,17 @@ object Main {
   def generateGameObjects(count: Integer): (World) => Seq[Entity] = ???
   // (world) => 1 to count map (_ => generateEntity(world))
 
-  def makeBehaviour: Behaviour = Random.between(0, 3) match
-    case 0 => Scissors
-    case 1 => Rock
-    case 2 => Paper
+  def makeBehaviour: Behaviour[Entity] = Random.between(0, 3) match
+    case 0 => ???
+    case 1 => ???
+    case 2 => ???
 
   def showMainWindow(title: String) = {
     import com.kine.game._
     val spawnNumber = 99
-    val rules = Rules(
-      ???
-        // Rule[Scissors].beats(Rule[Paper]),
-        // Rule[Paper].beats(Rule[Rock]),
-        // Rule[Rock].beats(Rule[Scissors])
-      )
+    
     val velocity = 5d
     val settings = Settings(
-      rules=rules,
       spawnNumber=spawnNumber,
       velocity=velocity
     )
