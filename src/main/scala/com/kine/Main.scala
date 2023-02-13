@@ -11,14 +11,27 @@ import com.kine.windowing._
 import com.kine.game._
 
 import scala.util.Random
+import scala.collection.mutable.ArrayBuffer
+
+import com.kine.game.EntityType
+import com.kine.game.EntityType.Rock
+import com.kine.game.EntityType.Paper
+import com.kine.game.EntityType.Scissors
+import com.kine.graphics._
+import com.kine.geom.Screen
 
 object Main {
   def main(args: Array[String]): Unit = {
     val title = "Rock Paper Scissors Simulator"
-    val world = World(Dimension(100, 100))
-    val gameObjects = generateGameObjects(99)
+    val worldNormDim = Dimension(1, 1)
+    val screen = Screen(800, 800, worldNormDim)
 
-    showMainWindow(title) { ui =>
+    val world = World(worldNormDim)
+    val game = Game(world, screen)
+
+    setupGame(game)
+
+    showMainWindow(title)(game) { ui =>
       ui setLocationRelativeTo null
       ui setDefaultCloseOperation WindowConstants.EXIT_ON_CLOSE
       ui.pack()
@@ -26,26 +39,27 @@ object Main {
     }
   }
 
-  def generateGameObjects(count: Integer): (World) => Seq[Entity] = ???
-  // (world) => 1 to count map (_ => generateEntity(world))
+  def setupGame: Game => Unit = (game: Game) => {
+    val gameObjects = generateGameObjects(
+      33 -> Rock,
+      33 -> Paper,
+      33 -> Scissors
+    ) foreach (entity => game.world instantiate entity)
+  }
 
-  def makeBehaviour: Behaviour[Entity] = Random.between(0, 3) match
-    case 0 => ???
-    case 1 => ???
-    case 2 => ???
+  def generateGameObjects[F <: EntityType](tuples: (Int, F)*) = {
+    for ((count, entityType) <- tuples)
+      yield for (_ <- 1 to count)
+        yield entityType
+  }.flatten
 
-  def showMainWindow(title: String) = {
+  def showMainWindow(title: String)(game: Game) = {
     import com.kine.game._
-    val spawnNumber = 99
-    
-    val velocity = 5d
-    val settings = Settings(
-      spawnNumber=spawnNumber,
-      velocity=velocity
-    )
-    val panel = MainPanel(settings)
-    val dials = Dials(settings)
-    val ui = UI(title, panel, dials)
+
+    val gpanel = GamePanel(game)
+    val panel = MainPanel(gpanel)(game.screen)
+
+    val ui = UI(title, panel)
     (fn: Function[UI, Unit]) => SwingUtilities.invokeLater(() => fn(ui))
   }
 }

@@ -1,4 +1,4 @@
-package com.kine.windowing
+package com.kine.graphics
 
 import java.awt.Graphics
 

@@ -1,32 +1,30 @@
 package com.kine
 
-import com.kine.game.Rock
 import java.awt.Window
+import com.kine.game.EntityType.{Rock => RockType}
+import com.kine.game.Rock
+import com.kine.geom._
+import com.kine.windowing._
 
 class ImageSuite extends munit.FunSuite {
+
   test("image is loaded") {
-    val behaviour = Rock
-    assertEquals(behaviour.name, "rock.jpg")
-    println(behaviour.base)
-    println(behaviour.image.get)
+    val appearance = RockType
+    assertEquals(appearance.name, "rock")
+    println(appearance.resource.get)
   }
 
   test("image is displayed") {
     import javax.swing._
 
-    val behaviour = Rock
+    val behaviour = RockType
 
-    val image = behaviour.image.get
-    val jframe = new JFrame("testing")
-    val jpanel = new JPanel()
-    val layout = new BoxLayout(jpanel, BoxLayout.Y_AXIS)
-    val icon = new ImageIcon(image)
-    val text = behaviour.base.toString()
-    val label = new JLabel(text, icon, 0)
+    val imageRenderer = behaviour.renderer
+    val e = Rock(Location(Point(10, 10)))
 
-    jpanel.add(label)
-    jframe.add(jpanel)
-
+    val childPanel = MainPanel()
+    val screen = Screen(50,50)
+    val jframe = UI("test", childPanel(screen))
     SwingUtilities.invokeAndWait(() => {
       jframe.pack()
       jframe.setVisible(true)
