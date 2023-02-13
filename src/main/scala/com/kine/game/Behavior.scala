@@ -13,7 +13,7 @@ trait Behavior[Own <: Entity, Beats <: Entity](implicit
 
   var destination: Point = null
 
-  def maxVelocity = 5d
+  def maxVelocity = 0.001d
 
   override def update(world: World): Unit = {
     // move aimlessly

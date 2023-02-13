@@ -12,9 +12,10 @@ import java.io.File
 import java.io.InputStream
 import javax.imageio.ImageIO
 import scala.util.Try
+import com.kine.geom.Screen
 
 sealed trait EntityType {
-  def renderer: (Entity) => Drawable
+  def renderer: (Screen) => (Entity) => Drawable
   def name: String
   def resource = Try(
     (this.getClass().getResource("/rps/" + name + ".jpg"))
@@ -34,17 +35,14 @@ object EntityType {
     override def name: String = "rock"
     override def renderer = {
       val image = ImageIO.read(resource.get)
-      (e: Entity) =>
-        (g: Graphics) => {
-          g.drawImage(
-            image,
-            e.location.point.x.toInt,
-            e.location.point.y.toInt,
-            10,
-            10,
-            null
-          )
-        }
+      (screen: Screen) =>
+        (e: Entity) =>
+          (g: Graphics) => {
+            val size = 50
+            val xy = e.location.point
+            val (x, y) = screen(xy.x, xy.y)
+            g.drawImage(image, x, y, size, size, null)
+          }
     }
   }
 
@@ -52,17 +50,14 @@ object EntityType {
     override def name: String = "paper"
     override def renderer = {
       val image = ImageIO.read(resource.get)
-      (e: Entity) =>
-        (g: Graphics) => {
-          g.drawImage(
-            image,
-            e.location.point.x.toInt,
-            e.location.point.y.toInt,
-            10,
-            10,
-            null
-          )
-        }
+      (screen: Screen) =>
+        (e: Entity) =>
+          (g: Graphics) => {
+            val size = 50
+            val xy = e.location.point
+            val (x, y) = screen(xy.x, xy.y)
+            g.drawImage(image, x, y, size, size, null)
+          }
     }
   }
 
@@ -70,17 +65,14 @@ object EntityType {
     override def name: String = "scissors"
     override def renderer = {
       val image = ImageIO.read(resource.get)
-      (e: Entity) =>
-        (g: Graphics) => {
-          g.drawImage(
-            image,
-            e.location.point.x.toInt,
-            e.location.point.y.toInt,
-            10,
-            10,
-            null
-          )
-        }
+      (screen: Screen) =>
+        (e: Entity) =>
+          (g: Graphics) => {
+            val size = 50
+            val xy = e.location.point
+            val (x, y) = screen(xy.x, xy.y)
+            g.drawImage(image, x, y, size, size, null)
+          }
     }
   }
 }

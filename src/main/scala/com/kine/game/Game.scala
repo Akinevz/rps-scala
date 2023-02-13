@@ -11,7 +11,7 @@ class Game(val world: World, val screen: Screen) extends Drawable {
 
   override def draw(g: Graphics): Unit = {
     for (entity <- world.all) {
-      val renderer = EntityType.of(entity).renderer
+      val renderer = EntityType.of(entity).renderer(screen)
       renderer(entity).draw(g)
     }
   }

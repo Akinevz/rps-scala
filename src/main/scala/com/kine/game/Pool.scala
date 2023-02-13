@@ -8,6 +8,8 @@ class Pool[T](var buffer: ArrayBuffer[T]) extends Iterable[T] {
     this.buffer.length
   }
 
+  def apply(idx:Int):T = buffer(idx)
+
   override def iterator: Iterator[T] = buffer.iterator
 }
 

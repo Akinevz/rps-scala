@@ -30,11 +30,17 @@ object Main {
     setupGame(game)
 
     showMainWindow(title)(game) { ui =>
+      val ticker = Ticker(FPS(60)) {
+        game.world.update()
+        ui.repaint()
+      }
       ui setLocationRelativeTo null
       ui setDefaultCloseOperation WindowConstants.EXIT_ON_CLOSE
       ui.pack()
       ui setVisible true
+      ticker.start()
     }
+
   }
 
   def setupGame: Game => Unit = (game: Game) => {

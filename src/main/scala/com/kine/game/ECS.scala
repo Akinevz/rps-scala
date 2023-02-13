@@ -8,11 +8,14 @@ import scala.collection.mutable.ArrayBuffer
 
 trait ECS { this: World =>
   val entities: Pool[Entity] = Pool()
+
   def update(): Unit = {
-    for (entity <- entities) {
+    for (i <- 0 until entities.size) {
+      val entity = entities(i)
       entity.update(this)
     }
   }
+
   def instantiate(go: EntityType): EId =
     entities += {
       go match

@@ -6,7 +6,7 @@ import com.kine.geom._
 sealed trait Entity {
   def location: Location
   def location_=(location: Location): Unit
-  def radius: Double = 5d
+  def radius: Double = 0.01d
 
   var active: Boolean = true
 
