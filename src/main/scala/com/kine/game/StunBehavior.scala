@@ -1,4 +1,5 @@
 package com.kine.game
+
 import com.kine.game.World
 
 trait StunBehavior { this: Entity =>

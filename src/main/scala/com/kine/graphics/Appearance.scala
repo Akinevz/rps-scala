@@ -1,7 +1,7 @@
 package com.kine.graphics
 
-import java.io.File
 import java.awt.image.BufferedImage
+import java.io.File
 import javax.imageio.ImageIO
 import scala.util.Try
 

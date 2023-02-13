@@ -1,11 +1,11 @@
 package com.kine.game
 
-import scala.util.Random
+import com.kine.geom._
+
 import java.awt.Dimension
 import scala.collection.mutable.ArrayBuffer
 import scala.reflect.ClassTag
-
-import com.kine.geom._
+import scala.util.Random
 
 final case class Dimensions(
     minx: Double,

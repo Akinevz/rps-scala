@@ -1,24 +1,22 @@
 package com.kine
 
-import java.awt.Dimension
-import javax.swing.SwingUtilities
-import javax.swing.JPanel
-import javax.swing.JLabel
-import javax.swing.JFrame
-import javax.swing.WindowConstants
-
-import com.kine.windowing._
-import com.kine.game._
-
-import scala.util.Random
-import scala.collection.mutable.ArrayBuffer
-
 import com.kine.game.EntityType
-import com.kine.game.EntityType.Rock
 import com.kine.game.EntityType.Paper
+import com.kine.game.EntityType.Rock
 import com.kine.game.EntityType.Scissors
-import com.kine.graphics._
+import com.kine.game._
 import com.kine.geom.Screen
+import com.kine.graphics._
+import com.kine.windowing._
+
+import java.awt.Dimension
+import javax.swing.JFrame
+import javax.swing.JLabel
+import javax.swing.JPanel
+import javax.swing.SwingUtilities
+import javax.swing.WindowConstants
+import scala.collection.mutable.ArrayBuffer
+import scala.util.Random
 
 object Main {
   def main(args: Array[String]): Unit = {

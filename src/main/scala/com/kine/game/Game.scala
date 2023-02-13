@@ -1,10 +1,11 @@
 package com.kine.game
 
-import javax.swing.JPanel
 import com.kine.geom.Screen
 import com.kine.graphics.Drawable
-import java.awt.Graphics
+
 import java.awt.Dimension
+import java.awt.Graphics
+import javax.swing.JPanel
 
 class Game(val world: World, val screen: Screen) extends Drawable {
 

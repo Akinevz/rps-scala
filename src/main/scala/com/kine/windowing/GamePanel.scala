@@ -1,11 +1,12 @@
 package com.kine.windowing
-import javax.swing.JPanel
-import java.awt.Graphics
-import java.awt.Dimension
-import java.awt.Color
-import java.awt.image.BufferedImage
-import java.awt.color.ColorSpace
 import com.kine.game.Game
+
+import java.awt.Color
+import java.awt.Dimension
+import java.awt.Graphics
+import java.awt.color.ColorSpace
+import java.awt.image.BufferedImage
+import javax.swing.JPanel
 
 final case class GamePanel(game: Game) extends JPanel {
 

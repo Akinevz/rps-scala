@@ -1,9 +1,10 @@
 package com.kine.game
 
-import scala.collection.mutable.ArrayBuffer
 import com.kine._
-import com.kine.geom._
 import com.kine.game._
+import com.kine.geom._
+
+import scala.collection.mutable.ArrayBuffer
 
 trait ECS { this: World =>
   val entities: Pool[Entity] = Pool()

@@ -1,15 +1,14 @@
 package com.kine.windowing
 
-import javax.swing._
-import java.awt.Graphics
-import java.awt.Dimension
-import java.awt.LayoutManager
-import com.kine.game.World
-import cats.instances.set
 import com.kine.Settings
-import java.awt.Color
-
+import com.kine.game.World
 import com.kine.geom.Screen
+
+import java.awt.Color
+import java.awt.Dimension
+import java.awt.Graphics
+import java.awt.LayoutManager
+import javax.swing._
 
 /** Make any JPanel auto add its components
   *

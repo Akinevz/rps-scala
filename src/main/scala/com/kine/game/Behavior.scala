@@ -2,6 +2,7 @@ package com.kine.game
 
 import com.kine.game.World
 import com.kine.geom.Point
+
 import scala.reflect.ClassTag
 
 trait Behavior[Own <: Entity, Beats <: Entity](implicit

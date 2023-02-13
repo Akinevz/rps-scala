@@ -1,15 +1,17 @@
 package com.kine.game
 
-import java.io.File
-import scala.util.Try
-import javax.imageio.ImageIO
-import java.io.InputStream
-import java.awt.Graphics
-import java.awt.image.ImageObserver
-import java.awt.Image
-
+import com.kine.game.{Paper => paper}
+import com.kine.game.{Rock => rock}
+import com.kine.game.{Scissors => scissors}
 import com.kine.graphics.Drawable
-import com.kine.game.{Rock => rock, Paper => paper, Scissors => scissors}
+
+import java.awt.Graphics
+import java.awt.Image
+import java.awt.image.ImageObserver
+import java.io.File
+import java.io.InputStream
+import javax.imageio.ImageIO
+import scala.util.Try
 
 sealed trait EntityType {
   def renderer: (Entity) => Drawable
