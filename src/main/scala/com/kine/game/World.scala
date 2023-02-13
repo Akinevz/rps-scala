@@ -37,23 +37,18 @@ class World(board: Dimensions) extends ECS {
       .map(e => e.asInstanceOf[E])
   }
 
-  def closest[E <: Entity](point: Point)(implicit tag: ClassTag[E]): E = {
+  def closest[E <: Entity](point: Point)(implicit tag: ClassTag[E]): Option[E] = {
     val shortestDistance = all
       .filter(e => tag.unapply(e).isDefined)
       .toList
       .sortBy(e => e.location distanceTo point)
-      .head
-    shortestDistance.asInstanceOf[E]
+      .headOption
+    shortestDistance.asInstanceOf[Option[E]]
   }
 
-  def update(e: Entity, u:Entity): Unit = {
+  def update(e: Entity, u: Entity): Unit = {
     val indexof: EId = all indexOf e
     entities.buffer(indexof) = u
   }
 }
 
-object World {
-  def apply(dim: Dimension): World = new World(
-    Dimensions(0, 0, dim.width, dim.height)
-  )
-}

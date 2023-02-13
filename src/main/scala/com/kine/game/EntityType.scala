@@ -13,6 +13,7 @@ import java.io.InputStream
 import javax.imageio.ImageIO
 import scala.util.Try
 import com.kine.geom.Screen
+import java.awt.Color
 
 sealed trait EntityType {
   def renderer: (Screen) => (Entity) => Drawable
@@ -31,6 +32,8 @@ object EntityType {
       case scissors(_) => Scissors
   }
 
+
+
   case object Rock extends EntityType {
     override def name: String = "rock"
     override def renderer = {
@@ -40,8 +43,10 @@ object EntityType {
           (g: Graphics) => {
             val size = 50
             val xy = e.location.point
-            val (x, y) = screen(xy.x, xy.y)
+            g setColor Color.RED
+            val screen(x, y) = (xy.x, xy.y)
             g.drawImage(image, x, y, size, size, null)
+            g drawRect (x, y, size, size)
           }
     }
   }
@@ -55,8 +60,10 @@ object EntityType {
           (g: Graphics) => {
             val size = 50
             val xy = e.location.point
-            val (x, y) = screen(xy.x, xy.y)
+            g setColor Color.BLUE
+            val screen(x, y) = (xy.x, xy.y)
             g.drawImage(image, x, y, size, size, null)
+            g drawRect (x, y, size, size)
           }
     }
   }
@@ -70,8 +77,10 @@ object EntityType {
           (g: Graphics) => {
             val size = 50
             val xy = e.location.point
-            val (x, y) = screen(xy.x, xy.y)
+            g setColor Color.GREEN
+            val screen(x, y) = (xy.x, xy.y)
             g.drawImage(image, x, y, size, size, null)
+            g drawRect (x, y, size, size)
           }
     }
   }

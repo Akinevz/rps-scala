@@ -16,13 +16,13 @@ final case class Screen(
   def yscaling: Double =
     world.width.toDouble / height.toDouble
 
-  def unapply(coord: Coord): WorldSpace = {
+  def apply(coord: Coord): WorldSpace = {
     (
       (coord._1.toDouble) * xscaling,
       (coord._2.toDouble) * yscaling
     )
   }
-  def apply(ws: WorldSpace): Coord = {
+  def unapply(ws: WorldSpace): Coord = {
     (
       (ws._1 / xscaling).toInt,
       (ws._2 / yscaling).toInt

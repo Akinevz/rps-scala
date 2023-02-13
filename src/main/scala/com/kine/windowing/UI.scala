@@ -17,6 +17,10 @@ import javax.swing._
 trait JParent(children: JComponent*) { this: JPanel =>
   for (child <- children) this add child
 }
+trait JSize(dim:Dimension) { this:JPanel => 
+  this setPreferredSize dim
+  this setMinimumSize dim
+}
 trait JBoxLayout(axis: Integer) { this: JPanel =>
   this.setLayout(new BoxLayout(this, axis))
 }
@@ -32,9 +36,8 @@ final case class MainPanel(
 )(screen: Screen)
     extends JPanel
     with JParent(children: _*)
+    with JSize(screen.dimension)
     with JBoxLayout(BoxLayout.Y_AXIS) {
-  this setPreferredSize screen.dimension
-  this setMinimumSize screen.dimension
 }
 final case class Dials(
     settings: Settings,

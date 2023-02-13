@@ -10,16 +10,16 @@ import javax.swing.JPanel
 
 final case class GamePanel(game: Game) extends JPanel {
 
-  def makeFrame(op: (Graphics) => Unit): BufferedImage = {
+  def makeFrame(all: (Graphics) => Unit): BufferedImage = {
     val dim = game.screen.dimension
     val buffer = BufferedImage(dim.width, dim.height, ColorSpace.TYPE_RGB)
     val graphics = buffer.getGraphics()
-    op(graphics)
+    all(graphics)
     graphics.dispose()
     buffer
   }
-  override def paint(g: Graphics): Unit = {
-    super.paint(g)
+  override protected def paintComponent(g: Graphics): Unit = {
+    super.paintComponent(g)
     val frame = makeFrame(game.draw)
     g.drawImage(frame, 0, 0, getWidth(), getHeight(), null)
   }

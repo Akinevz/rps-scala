@@ -11,15 +11,15 @@ trait Behavior[Own <: Entity, Beats <: Entity](implicit
   type Prey = Beats
   def onContact(other: Prey): Own
 
-  var destination: Point = null
+  var someTarget:Option[Prey] = None
+  def destination: Point = someTarget match
+    case None => Point(0.5,0.5)
+    case Some(value) => value.location.point
+  
 
   def maxVelocity = 0.001d
 
   override def update(world: World): Unit = {
-    // move aimlessly
-    if (destination == null)
-      destination = world.random
-
     // move to new location
     this.location = location.copy(
       point = location.point + location.velocity,
@@ -30,8 +30,7 @@ trait Behavior[Own <: Entity, Beats <: Entity](implicit
     val targets: Seq[Prey] =
       world.neighbours[Prey](this.destination)(this.radius)
     if (targets.isEmpty) {
-      val newDest = world.closest[Prey](world.random)
-      this.destination = newDest.location.point
+      someTarget = world.closest[Prey](location.point)
     }
 
     // convert in vicinity

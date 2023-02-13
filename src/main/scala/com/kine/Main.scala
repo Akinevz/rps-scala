@@ -18,36 +18,40 @@ import javax.swing.WindowConstants
 import scala.collection.mutable.ArrayBuffer
 import scala.util.Random
 
+object TimerUtil {
+  def apply(something: => Unit): Long = {
+    val before = System.currentTimeMillis()
+    something
+    val after = System.currentTimeMillis()
+    after - before
+  }
+}
 object Main {
   def main(args: Array[String]): Unit = {
+    System.setProperty("sun.java2d.opengl", "true")
     val title = "Rock Paper Scissors Simulator"
-    val worldNormDim = Dimension(1, 1)
-    val screen = Screen(800, 800, worldNormDim)
+    val screen = Screen(800, 800, Dimension(1, 1))
 
-    val world = World(worldNormDim)
+    val world = World(Dimensions(0d, 0d, 1d, 1d))
     val game = Game(world, screen)
 
     setupGame(game)
 
-    showMainWindow(title)(game) { ui =>
-      val ticker = Ticker(FPS(60)) {
-        game.world.update()
-        ui.repaint()
+    showMainWindow(title)(game) { (ui: UI) =>
+      {
+        ui setLocationRelativeTo null
+        ui setDefaultCloseOperation WindowConstants.EXIT_ON_CLOSE
+        ui.pack()
+        ui setVisible true
       }
-      ui setLocationRelativeTo null
-      ui setDefaultCloseOperation WindowConstants.EXIT_ON_CLOSE
-      ui.pack()
-      ui setVisible true
-      ticker.start()
     }
-
   }
 
   def setupGame: Game => Unit = (game: Game) => {
     val gameObjects = generateGameObjects(
-      33 -> Rock,
-      33 -> Paper,
-      33 -> Scissors
+      5 -> Rock,
+      5 -> Paper,
+      5 -> Scissors
     ) foreach (entity => game.world instantiate entity)
   }
 
@@ -63,7 +67,17 @@ object Main {
     val gpanel = GamePanel(game)
     val panel = MainPanel(gpanel)(game.screen)
 
+    val ticker = Ticker(FPS(20)) {
+      game.world.update()
+      gpanel.repaint()
+    }
+
     val ui = UI(title, panel)
-    (fn: Function[UI, Unit]) => SwingUtilities.invokeLater(() => fn(ui))
+
+    (fn: Function[UI, Unit]) => {
+      SwingUtilities.invokeAndWait(() => fn(ui))
+      ticker.start()
+    }
+
   }
 }
