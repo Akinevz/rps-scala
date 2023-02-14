@@ -23,24 +23,24 @@ class World(board: Dimensions) extends ECS {
     Random.between(board.miny, board.maxy)
   )
 
-  def all: IndexedSeq[Entity] = this.entities.buffer.toIndexedSeq
+  def all: ArrayBuffer[Entity] = this.entities.buffer
 
   def neighbours[E](
       point: Point
   )(distance: Double)(implicit tag: ClassTag[E]): Seq[E] = {
     if (point == null) return neighbours(random)(distance)
 
-    all.toList
-      .sortBy(e => e.location distanceTo point)
+    all
       .filter(e => (e.location distanceTo point) < distance)
+      .sortBy(e => e.location distanceTo point)
       .filter(e => tag.unapply(e).isDefined)
       .map(e => e.asInstanceOf[E])
+      .toSeq
   }
 
   def closest[E <: Entity](point: Point)(implicit tag: ClassTag[E]): Option[E] = {
     val shortestDistance = all
       .filter(e => tag.unapply(e).isDefined)
-      .toList
       .sortBy(e => e.location distanceTo point)
       .headOption
     shortestDistance.asInstanceOf[Option[E]]

@@ -18,8 +18,7 @@ final case class GamePanel(game: Game) extends JPanel {
     graphics.dispose()
     buffer
   }
-  override protected def paintComponent(g: Graphics): Unit = {
-    super.paintComponent(g)
+  def doPaint(g: Graphics): Unit = {
     val frame = makeFrame(game.draw)
     g.drawImage(frame, 0, 0, getWidth(), getHeight(), null)
   }

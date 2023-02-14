@@ -11,24 +11,24 @@ trait Behavior[Own <: Entity, Beats <: Entity](implicit
   type Prey = Beats
   def onContact(other: Prey): Own
 
-  var someTarget:Option[Prey] = None
-  def destination: Point = someTarget match
-    case None => Point(0.5,0.5)
-    case Some(value) => value.location.point
-  
+  var someTarget: Option[Prey] = None
+  def destination: (World) => Point = (w) =>
+    someTarget match
+      case None        => w.random
+      case Some(value) => value.location.point
 
-  def maxVelocity = 0.001d
+  def maxVelocity = 0.01d
 
   override def update(world: World): Unit = {
     // move to new location
     this.location = location.copy(
       point = location.point + location.velocity,
-      velocity = (destination - location.point) length (maxVelocity)
+      velocity = (destination(world) - location.point) length (maxVelocity)
     )
 
     // check targets
     val targets: Seq[Prey] =
-      world.neighbours[Prey](this.destination)(this.radius)
+      world.neighbours[Prey](destination(world))(this.radius)
     if (targets.isEmpty) {
       someTarget = world.closest[Prey](location.point)
     }

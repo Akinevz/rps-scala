@@ -9,7 +9,7 @@ import scala.collection.mutable.ArrayBuffer
 trait ECS { this: World =>
   val entities: Pool[Entity] = Pool()
 
-  def update(): Unit = {
+  def update(): Unit = entities.synchronized {
     for (i <- 0 until entities.size) {
       val entity = entities(i)
       entity.update(this)
