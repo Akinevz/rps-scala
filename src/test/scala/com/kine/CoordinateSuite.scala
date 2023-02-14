@@ -10,7 +10,9 @@ class CoordinateSuite extends munit.FunSuite {
 
     assertEquals((x, y), (0.5d, 0.5d))
 
-    val screen(x2, y2) = (1,1)
+    val screen(x2, y2) = (1d, 1d)
     println(x2 -> y2)
+
+    assertEquals((x2, y2), (800, 600))
   }
 }

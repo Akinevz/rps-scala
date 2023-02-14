@@ -1,7 +1,7 @@
 package com.kine.game
 
 import com.kine.geom.Screen
-import com.kine.graphics.Drawable
+import com.kine.game.Drawable
 
 import java.awt.Dimension
 import java.awt.Graphics

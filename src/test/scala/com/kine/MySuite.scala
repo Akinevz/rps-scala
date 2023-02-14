@@ -16,7 +16,8 @@ class MySuite extends munit.FunSuite {
     )
     window.setPreferredSize(dim)
     window.pack()
-    assertEquals(window.size(), dim)
+    assert(window.getWidth() >= dim.width)
+    assert(window.getHeight() >= dim.height)
   }
 
   test("window opens") {

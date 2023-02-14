@@ -3,7 +3,7 @@ package com.kine.game
 import com.kine.game.{Paper => paper}
 import com.kine.game.{Rock => rock}
 import com.kine.game.{Scissors => scissors}
-import com.kine.graphics.Drawable
+import com.kine.game.Drawable
 
 import java.awt.Graphics
 import java.awt.Image
@@ -19,7 +19,7 @@ sealed trait EntityType {
   def renderer: (Screen) => (Entity) => Drawable
   def name: String
   def resource = Try(
-    (this.getClass().getResource("/rps/" + name + ".jpg"))
+    (this.getClass().getResource("/rps/" + name + ".png"))
   )
 }
 
@@ -31,8 +31,6 @@ object EntityType {
       case paper(_)    => Paper
       case scissors(_) => Scissors
   }
-
-
 
   case object Rock extends EntityType {
     override def name: String = "rock"
@@ -46,7 +44,7 @@ object EntityType {
             g setColor Color.RED
             val screen(x, y) = (xy.x, xy.y)
             g.drawImage(image, x, y, size, size, null)
-            g drawRect (x, y, size, size)
+            // g drawRect (x, y, size, size)
           }
     }
   }
@@ -63,7 +61,7 @@ object EntityType {
             g setColor Color.BLUE
             val screen(x, y) = (xy.x, xy.y)
             g.drawImage(image, x, y, size, size, null)
-            g drawRect (x, y, size, size)
+            // g drawRect (x, y, size, size)
           }
     }
   }
@@ -80,7 +78,7 @@ object EntityType {
             g setColor Color.GREEN
             val screen(x, y) = (xy.x, xy.y)
             g.drawImage(image, x, y, size, size, null)
-            g drawRect (x, y, size, size)
+            // g drawRect (x, y, size, size)
           }
     }
   }

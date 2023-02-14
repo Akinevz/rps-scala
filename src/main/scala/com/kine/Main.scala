@@ -38,9 +38,9 @@ object Main {
     setupGame(game)
 
     showMainWindow(title)(game) { ui =>
-      ui setLocationRelativeTo null
-      ui setDefaultCloseOperation WindowConstants.EXIT_ON_CLOSE
       ui.pack()
+      ui setDefaultCloseOperation WindowConstants.EXIT_ON_CLOSE
+      ui setLocationRelativeTo null
       ui setVisible true
     }
   }
