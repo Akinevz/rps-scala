@@ -68,7 +68,7 @@ object Main {
     val updater = Ticker(FPS(60)) {
       game.world.update()
     }
-    val repainter = Ticker(FPS(120)) {
+    val repainter = Ticker(FPS(60)) {
       val g = gpanel.getGraphics()
       gpanel.doPaint(g)
       g.dispose()
