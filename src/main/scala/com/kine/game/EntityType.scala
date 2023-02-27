@@ -3,7 +3,7 @@ package com.kine.game
 import com.kine.game.{Paper => paper}
 import com.kine.game.{Rock => rock}
 import com.kine.game.{Scissors => scissors}
-import com.kine.game.Drawable
+import com.kine.gfx.Drawable
 
 import java.awt.Graphics
 import java.awt.Image

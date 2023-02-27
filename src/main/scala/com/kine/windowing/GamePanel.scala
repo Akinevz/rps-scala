@@ -1,5 +1,5 @@
 package com.kine.windowing
-import com.kine.game.Game
+import com.kine.gfx.Game
 
 import java.awt.Color
 import java.awt.Dimension

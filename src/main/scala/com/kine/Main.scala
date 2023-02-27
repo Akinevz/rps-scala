@@ -4,7 +4,6 @@ import com.kine.game.EntityType
 import com.kine.game.EntityType.Paper
 import com.kine.game.EntityType.Rock
 import com.kine.game.EntityType.Scissors
-import com.kine.game._
 import com.kine.geom.Screen
 import com.kine.windowing._
 
@@ -17,6 +16,9 @@ import javax.swing.WindowConstants
 import scala.collection.mutable.ArrayBuffer
 import scala.util.Random
 
+import com.kine.gfx.Game
+import com.kine.game.World
+import com.kine.game.Dimensions
 object TimerUtil {
   def apply(something: => Unit): Long = {
     val before = System.currentTimeMillis()
@@ -58,13 +60,13 @@ object Main {
         yield entityType
   }.flatten
 
-  def showMainWindow(title: String)(game: Game) = {
+  def showMainWindow(title: String)(g: Game) = {
 
-    val gpanel = GamePanel(game)
-    val panel = MainPanel(gpanel)(game.screen)
+    val gpanel = GamePanel(g)
+    val panel = MainPanel(gpanel)(g.screen)
 
     val updater = Ticker(FPS(60)) {
-      game.world.update()
+      g.world.update()
     }
     val repainter = Ticker(FPS(60)) {
       val g = gpanel.getGraphics()
