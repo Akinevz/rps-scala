@@ -1,4 +1,4 @@
-package com.kine.game
+package com.kine.gfx
 
 import java.awt.Graphics
 

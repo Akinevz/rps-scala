@@ -6,7 +6,6 @@ import com.kine.game.EntityType.Rock
 import com.kine.game.EntityType.Scissors
 import com.kine.game._
 import com.kine.geom.Screen
-import com.kine.graphics._
 import com.kine.windowing._
 
 import java.awt.Dimension
@@ -60,7 +59,6 @@ object Main {
   }.flatten
 
   def showMainWindow(title: String)(game: Game) = {
-    import com.kine.game._
 
     val gpanel = GamePanel(game)
     val panel = MainPanel(gpanel)(game.screen)

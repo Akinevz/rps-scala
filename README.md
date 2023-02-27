@@ -13,3 +13,10 @@ The rules are:
  - rocks convert scissors to rocks
 
 When there remains only one type of entity on the board the simulation is considered finished.
+
+#### preview
+![image](./preview.png)
+
+
+#### next steps
+refactor code
